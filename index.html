@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>郑州大学数据中台2021</title>
+    <link rel="stylesheet" href="./css/style.css">
+
+    <script language="javascript">
+        var counter = 0;
+        function hnceTimer() {
+            if (counter % 2) {
+                counter++;
+                document.getElementById('bian92a').style.backgroundColor = "#bfffc8";
+                document.getElementById('bian92b1').style.backgroundColor = "#bfffc8";
+                document.getElementById('bian92b2').style.backgroundColor = "#bfffc8";
+                document.getElementById('bian92c').style.backgroundColor = "#bfffc8";
+            } else {
+                counter--;
+                document.getElementById('bian92a').style.backgroundColor = "#090";
+                document.getElementById('bian92b1').style.backgroundColor = "#090";
+                document.getElementById('bian92b2').style.backgroundColor = "#090";
+                document.getElementById('bian92c').style.backgroundColor = "#090";
+            }
+        }
+        function PrefixInteger(num) {
+            return (Array(2).join('0') + num).slice(-2);
+        }
+        function showTime() {
+            var myDate = new Date();
+            var month = PrefixInteger(myDate.getMonth() + 1);
+            var day = PrefixInteger(myDate.getDate());
+            var hours = PrefixInteger(myDate.getHours());
+            var minutes = PrefixInteger(myDate.getMinutes());
+            var systemTime = document.getElementById("time");
+            systemTime.innerHTML = "(" + month + "月" + day + "日" + " " + hours + ":" + minutes + "获取)";
+        }
+        function changeLocation(selectedValue) {
+            var locationElement = document.getElementById("location");
+            var mainGate = document.getElementById("gate");
+            switch (selectedValue) {
+                case 'east':
+                    locationElement.innerHTML = "定位河南省郑州市中原区长春路附近";
+                    mainGate.innerText = "东门";
+                    break;
+                case 'north':
+                    locationElement.innerHTML = "定位河南省郑州市中原区莲花街附近";
+                    mainGate.innerText = "北门";
+                    break;
+                case 'south':
+                    locationElement.innerHTML = "定位河南省郑州市中原区科学大道附近";
+                    mainGate.innerText = "南门";
+                    break;
+            }
+        }
+        function generate_passcode() {
+            var timeID = 0;
+            var timeID = setInterval("hnceTimer()", 1000);
+            hnceTimer();
+            showTime();
+            document.querySelector("div[id='bak_1']").style.display = 'none';
+            document.querySelector("div[id='bak_0']").style.display = 'block';
+        }
+        function preloadImage(url) {
+            var img = new Image();
+            img.src = url;
+        }
+        preloadImage("./images/passcode.png");
+        preloadImage("./images/sf_sheng4.png");
+        preloadImage("./images/split5.png");
+    </script>
+
+<body>
+    <div id="bak_0">
+        <div style="width:100%;height:88px;background:url(./images/passcode.png);"></div>
+        <div style="width:100%;height:7px;BACKGROUND-IMAGE: url(./images/split5.png)"></div>
+        <div style="width:100%; min-height:90px;">
+            <div style="width:100%;height:6px;text-align:left;"></div>
+            <div
+                style="width:100%;min-height:26px;line-height:26px;font-size:16px;color:#00c;font-weight:500;font-family:黑体;BACKGROUND-IMAGE:url(./images/sf_sheng4.png)">
+                <span id="college_and_name" style="color:#00a">college.name</span>　<a href="https://baidu.com"><span
+                        style="font-size:12px;;color:#00c;">〖切换账号〗</span></a>
+                <br>主校区大门<span id="gate">东门</span>.<span
+                    style="background-color:#070;color:#ff0">入口</span><br>身份：正常出入校园本科生<span
+                    style="font-size:12px;color:#333;" id="time">(00月00日 00:00获取)</span>
+                <br>
+                <span style="color:#f00;font-size:12px">提醒：未检索到你今日出校记录</span>
+            </div>
+        </div>
+        <div style="width: 100%; height: 15px; background-color: rgb(0, 153, 0);" id="bian92a"></div>
+        <div style="width:100%;height:280px;">
+            <div style="width: 15px; height: 100%; background-color: rgb(0, 153, 0); float: left;" id="bian92b1"></div>
+            <div style="width:320px;height:100%;float:left;text-align:center;">
+                <img src="./images/Jason.jpg" id="user_portrait" style="height:280px;border:0px;" alt="user's portrait">
+            </div>
+            <div style="width: 14px; height: 100%; background-color: rgb(0, 153, 0); float: right;" id="bian92b2"></div>
+        </div>
+        <div style="width: 100%; height: 15px; background-color: rgb(0, 153, 0);" id="bian92c"></div>
+        <div style="width:100%;height:7px;BACKGROUND-IMAGE: url(./images/split5.png)"></div>
+        <div style="width:100%;height:116px;">
+            <div style="width:100%;height:80px;" id="msg11a">
+                <div class="hes1"><br>不再检测核酸时间</div>
+                <div style="width:20px;height:100%;float:left"></div>
+                <div class="yim1"><br>新冠疫苗接种<br>3剂次</div>
+                <div style="width:2px;height:100%;float:right"></div>
+            </div>
+            <div class="bar916">
+                <div style="width:50%;height:100%;float:left;font-size:12px;color:#666;line-height:20px;" id="msg11b">
+                </div>
+                <div style="width:48%;height:100%;float:right;font-size:12px;color:#666;line-height:20px;" id="msg11c">
+                    <span id="location" style="color:#00a">定位河南省郑州市中原区长春路附近</span>　<span
+                        style="color:#00c">扫码在设定区域内</span>
+                </div>
+            </div>
+        </div>
+        <div style="width:100%;height:7px;BACKGROUND-IMAGE: url(./images/split5.png)"></div>
+        <div style="width:100%;min-height:18px;line-height:18px;font-size:12px;color:#666;text-align:center">
+            郑州大学疫情防控领导小组、保卫处、信息化办公室</div>
+    </div>
+    <script>document.querySelector("div[id='bak_0']").style.display = 'none';</script>
+    <div id="bak_1">
+        <div id="preview">
+            <label style="position: relative; bottom: 8px;">图片预览</label><br>
+            <img src="./images/Jason.jpg" id="user_portrait_preview" style="height:200px;border:0px;"
+                alt="user's portrait preview">
+        </div>
+        <form id="info_form">
+            <label for="name">大门：<select name='work' size='1' onchange="changeLocation(this.value)">
+                    <option value='east' selected='selected'>东门</option>
+                    <option value='north'>北门</option>
+                    <option value='south'>南门</option>
+                </select></label><br>
+            <label for="name">姓名：<input type="text" id="name" name="name" placeholder="刘炯天"></label><br>
+            <label for="college">学院：<input type="text" id="college" name="college" placeholder="电气信息学院"></label><br>
+            <label for="photo">照片：<input type="file" id="photo" name="photo" onchange="handleFiles()"></label><br>
+            <div style="text-align: center;"><button type="submit">生成通行码</button></div>
+        </form>
+    </div>
+    <script>
+        const form = document.getElementById("info_form");
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            const name = document.getElementById("name").value ? document.getElementById("name").value : "刘炯天";
+            const college = document.getElementById("college").value ? document.getElementById("college").value : "电气信息学院";
+            const nameElement = document.getElementById("college_and_name");
+            nameElement.innerHTML = college + "." + name;
+            generate_passcode();
+        });
+
+        function handleFiles() {
+            const photo = document.getElementById("photo").files[0]; // 获取上传的图片文件
+            const reader = new FileReader();
+            reader.onload = function (e) {         // 当文件读取完成时执行以下操作
+                const imageUrl = e.target.result;
+                const imgElement = document.getElementById("user_portrait");
+                const imgElement_pre = document.getElementById("user_portrait_preview");
+                imgElement.src = imageUrl;
+                imgElement_pre.src = imageUrl;
+            };
+            reader.readAsDataURL(photo); // 读取图片文件并将其转换为 URL 地址
+        }
+
+    </script>
+</body>
+
+</html>
