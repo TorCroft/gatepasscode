@@ -9,6 +9,7 @@
 
     <script language="javascript">
         var counter = 0;
+        var timeID = 0;
         function hnceTimer() {
             if (counter % 2) {
                 counter++;
@@ -55,7 +56,6 @@
             }
         }
         function generate_passcode() {
-            var timeID = 0;
             var timeID = setInterval("hnceTimer()", 1000);
             hnceTimer();
             showTime();
@@ -79,7 +79,7 @@
             <div style="width:100%;height:6px;text-align:left;"></div>
             <div
                 style="width:100%;min-height:26px;line-height:26px;font-size:16px;color:#00c;font-weight:500;font-family:黑体;BACKGROUND-IMAGE:url(./images/sf_sheng4.png)">
-                <span id="college_and_name" style="color:#00a">college.name</span>　<a href="https://baidu.com"><span
+                <span id="college_and_name" style="color:#00a">college.name</span>　<a href="javascript:location.reload();"><span
                         style="font-size:12px;;color:#00c;">〖切换账号〗</span></a>
                 <br>主校区大门<span id="gate">东门</span>.<span
                     style="background-color:#070;color:#ff0">入口</span><br>身份：正常出入校园本科生<span
