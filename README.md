@@ -1,4 +1,4 @@
-# gatepasscode
+# gatepasscode [![pages-build-deployment](https://github.com/TorCroft/gatepasscode/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/TorCroft/gatepasscode/actions/workflows/pages/pages-build-deployment)
 郑州大学主校区通行码，适配北门、东门、南门。
 
 ## Usage
