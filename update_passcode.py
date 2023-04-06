@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 
 def download_img(image_url):
     response = requests.get(image_url)
-    with open('./images/passcode.png', 'wb') as f:
+    with open('./page/images/passcode.png', 'wb') as f:
         f.write(response.content)
     print('Download completed ...')
     return True
@@ -83,8 +83,8 @@ class Core(object):
             div_tag = self.bs4.find('div', attrs={"id": "bak_0"}).find('div')
             code_url = self.base_url + div_tag['style'].split('url(')[1].split(')')[0]
             return download_img(code_url)
-        except Exception:
-            print('Download failed ...')
+        except Exception as e:
+            print(f'Download failed ... {e}')
             return False
 
     def run(self) -> bool:
