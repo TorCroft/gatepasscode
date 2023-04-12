@@ -12,4 +12,4 @@ git使用的邮箱，具体请参考`./github/workflows/main.yml`，用于git pu
 GitHub的用户名，用于git push推送新的通行码图片到仓库（该图片每天一换）。
 
 ### 如何创建一个GitHub Pages来部署静态网站
-* Settings -> Pages -> Build and deployment, Sorce选择Github Actions，选择静态HTML网站，然后yml文件选择`./github/workflows/static.yml`。
+* Settings -> Pages -> Build and deployment, Source选择Github Actions，选择静态HTML网站，然后yml文件选择`./github/workflows/static.yml`。
