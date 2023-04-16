@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>郑州大学数据中台2021</title>
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="shortcut icon" href="./cxk_icon.ico" type="image/x-icon">
 
     <script language="javascript">
         var counter = 0;
@@ -67,18 +68,18 @@
             img.src = url;
         }
         preloadImage("./images/passcode.png");
-        preloadImage("./images/sf_sheng4.png");
-        preloadImage("./images/split5.png");
+        preloadImage("./images/sheng.png");
+        preloadImage("./images/split.png");
     </script>
 
 <body>
     <div id="bak_0">
         <div style="width:100%;height:88px;background:url(./images/passcode.png);"></div>
-        <div style="width:100%;height:7px;BACKGROUND-IMAGE: url(./images/split5.png)"></div>
+        <div style="width:100%;height:7px;BACKGROUND-IMAGE: url(./images/split.png)"></div>
         <div style="width:100%; min-height:90px;">
             <div style="width:100%;height:6px;text-align:left;"></div>
             <div
-                style="width:100%;min-height:26px;line-height:26px;font-size:16px;color:#00c;font-weight:500;font-family:黑体;BACKGROUND-IMAGE:url(./images/sf_sheng4.png)">
+                style="width:100%;min-height:26px;line-height:26px;font-size:16px;color:#00c;font-weight:500;font-family:黑体;BACKGROUND-IMAGE:url(./images/sheng.png)">
                 <span id="college_and_name" style="color:#00a">college.name</span>　<a href="javascript:location.reload();"><span
                         style="font-size:12px;;color:#00c;">〖切换账号〗</span></a>
                 <br>主校区大门<span id="gate">东门</span>.<span
@@ -92,12 +93,12 @@
         <div style="width:100%;height:280px;">
             <div style="width: 15px; height: 100%; background-color: rgb(0, 153, 0); float: left;" id="bian92b1"></div>
             <div style="width:320px;height:100%;float:left;text-align:center;">
-                <img src="./images/Jason.jpg" id="user_portrait" style="height:280px;border:0px;" alt="user's portrait">
+                <img src="./images/preview.png" id="user_portrait" style="height:280px;border:0px;" alt="user's portrait">
             </div>
             <div style="width: 14px; height: 100%; background-color: rgb(0, 153, 0); float: right;" id="bian92b2"></div>
         </div>
         <div style="width: 100%; height: 15px; background-color: rgb(0, 153, 0);" id="bian92c"></div>
-        <div style="width:100%;height:7px;BACKGROUND-IMAGE: url(./images/split5.png)"></div>
+        <div style="width:100%;height:7px;BACKGROUND-IMAGE: url(./images/split.png)"></div>
         <div style="width:100%;height:116px;">
             <div style="width:100%;height:80px;" id="msg11a">
                 <div class="hes1"><br>不再检测核酸时间</div>
@@ -114,15 +115,15 @@
                 </div>
             </div>
         </div>
-        <div style="width:100%;height:7px;BACKGROUND-IMAGE: url(./images/split5.png)"></div>
+        <div style="width:100%;height:7px;BACKGROUND-IMAGE: url(./images/split.png)"></div>
         <div style="width:100%;min-height:18px;line-height:18px;font-size:12px;color:#666;text-align:center">
             郑州大学疫情防控领导小组、保卫处、信息化办公室</div>
     </div>
     <script>document.querySelector("div[id='bak_0']").style.display = 'none';</script>
     <div id="bak_1">
         <div id="preview">
-            <label style="position: relative; bottom: 8px;">图片预览</label><br>
-            <img src="./images/Jason.jpg" id="user_portrait_preview" style="height:200px;border:0px;"
+            <label style="position: relative; bottom: 8px;">照片预览</label><br>
+            <img src="./images/preview.png" id="user_portrait_preview" style="height:200px;border:0px;"
                 alt="user's portrait preview">
         </div>
         <form id="info_form">
@@ -131,7 +132,7 @@
                     <option value='north'>北门</option>
                     <option value='south'>南门</option>
                 </select></label><br>
-            <label for="name">姓名：<input type="text" id="name" name="name" placeholder="刘炯天"></label><br>
+            <label for="name">姓名：<input type="text" id="name" name="name" placeholder="你鸡哥"></label><br>
             <label for="college">学院：<input type="text" id="college" name="college" placeholder="电气信息学院"></label><br>
             <label for="photo">照片：<input type="file" id="photo" name="photo" onchange="handleFiles()"></label><br>
             <div style="text-align: center;"><button type="submit">生成通行码</button></div>
@@ -141,7 +142,7 @@
         const form = document.getElementById("info_form");
         form.addEventListener("submit", function (event) {
             event.preventDefault();
-            const name = document.getElementById("name").value ? document.getElementById("name").value : "刘炯天";
+            const name = document.getElementById("name").value ? document.getElementById("name").value : "你鸡哥";
             const college = document.getElementById("college").value ? document.getElementById("college").value : "电气信息学院";
             const nameElement = document.getElementById("college_and_name");
             nameElement.innerHTML = college + "." + name;
