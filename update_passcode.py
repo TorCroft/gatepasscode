@@ -14,15 +14,15 @@ def download_img(image_url):
 
 class Core(object):
     def __init__(self) -> None:
-        try:
-            uid_pwd = os.environ.get('uid_and_pwd').split("&")
-        except AttributeError:
+        env_uid_pwd = os.environ.get('uid_and_pwd')
+        if env_uid_pwd:
+            uid_pwd = env_uid_pwd.split("&")
+            self.id = uid_pwd[0]
+            self.pwd = uid_pwd[1]
+        else:
             # 本地运行时使用
             self.id = input("Input Your Uid >")
             self.pwd = input("Input Your Password >")
-        else:
-            self.id = uid_pwd[0]
-            self.pwd = uid_pwd[1]
 
         self.text = ''
         self.bs4 = None
@@ -47,14 +47,12 @@ class Core(object):
         }
         for i in range(3):
             try:
-                r = requests.post(
-                    self.login_url, headers=self.headers, data=self.form, timeout=(200, 200))
+                r = requests.post(self.login_url, headers=self.headers, data=self.form, timeout=(200, 200))
             except:
                 if i == 2:
                     raise print('Please check your Internet connection ...')
             else:
-                self.text = r.text.encode(
-                    r.encoding).decode(r.apparent_encoding)
+                self.text = r.text.encode(r.encoding).decode(r.apparent_encoding)
                 matchObj = re.search(r'ptopid=(\w+)\&sid=(\w+)\"', self.text)
                 break
         try:
@@ -88,7 +86,7 @@ class Core(object):
             return False
 
     def run(self) -> bool:
-        print(f"Preparing to sign ...")
+        print("Preparing to log in ...")
         if not self.login():
             print("登录失败 ...")
             return False
