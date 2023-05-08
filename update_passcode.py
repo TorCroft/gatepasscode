@@ -48,7 +48,6 @@ class Core(object):
         for i in range(3):
             try:
                 r = requests.post(self.login_url, headers=self.HEADERS, data=self.form, timeout=(200, 200))
-                r.raise_for_status()
             except:
                 if i == 2:
                     raise print('Please check your Internet connection ...')
