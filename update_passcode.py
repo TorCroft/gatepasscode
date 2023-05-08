@@ -4,7 +4,7 @@ import os
 from bs4 import BeautifulSoup
 
 
-def get_user_config() -> dict:
+def get_user_config():
     if os.getenv("UID_PWD") is None:
         from dotenv import load_dotenv
         print("从.env文件中加载环境变量 ...")
