@@ -27,18 +27,15 @@ jobs:
         run: echo "timestamp=$(date -u +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_OUTPUT
         id: time
 
-      - name: Update Passcode Image
+      - name: Run Python Script
         env:
           uid_and_pwd: ${{ secrets.UID_PWD }}
         run: |
           python3 ./update_passcode.py
+
+      - name: Push if there are any changes
+        run: |
           git config --global user.email "${{ secrets.EMAIL }}"
           git config --global user.name "${{ secrets.USERNAME }}"
           git add .
-          git commit -m "Update Passcode Image - UTC ${{ steps.time.outputs.timestamp }}"
-          
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
+          git commit -m "Update Passcode Image - ${{ steps.time.outputs.timestamp }} UTC" && git push || echo "No changes to commit"

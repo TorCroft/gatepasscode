@@ -13,6 +13,12 @@ def download_img(image_url):
 
 
 class Core(object):
+    HEADERS = {
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:98.0) Gecko/20100101 Firefox/98.0',
+            'referer': 'https://jksb.v.zzu.edu.cn/vls6sss/zzujksb.dll/first0?fun2=a',
+            "Content-Type": 'application/x-www-form-urlencoded'
+        }
+
     def __init__(self) -> None:
         env_uid_pwd = os.environ.get('uid_and_pwd')
         if env_uid_pwd:
@@ -32,12 +38,6 @@ class Core(object):
         self.login_url = "https://jksb.v.zzu.edu.cn/vls6sss/zzujksb.dll/login"
         self.pass_url = "https://jksb.v.zzu.edu.cn/vls6sss/zzujksb.dll/gettongxing?ptopid={}&door=0001&sid={}"
 
-        self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:98.0) Gecko/20100101 Firefox/98.0',
-            'referer': 'https://jksb.v.zzu.edu.cn/vls6sss/zzujksb.dll/first0?fun2=a',
-            "Content-Type": 'application/x-www-form-urlencoded'
-        }
-
     def login(self) -> bool:
         self.form = {
             "uid": self.id,
@@ -47,18 +47,22 @@ class Core(object):
         }
         for i in range(3):
             try:
-                r = requests.post(self.login_url, headers=self.headers, data=self.form, timeout=(200, 200))
+                r = requests.post(self.login_url, headers=self.HEADERS, data=self.form, timeout=(200, 200))
+                r.raise_for_status()
             except:
                 if i == 2:
                     raise print('Please check your Internet connection ...')
             else:
                 self.text = r.text.encode(r.encoding).decode(r.apparent_encoding)
-                matchObj = re.search(r'ptopid=(\w+)\&sid=(\w+)\"', self.text)
+                matchObj = re.match(r'ptopid=(\w+)\&sid=(\w+)\"', self.text)
                 break
         try:
             self.ptopid = matchObj.group(1)
             self.sid = matchObj.group(2)
-        except:
+        except requests.exceptions.RequestException as e:
+            print(f'Login failed ... {e}')
+            return False
+        except (AttributeError, IndexError):
             if '密码输入错误' in self.text:
                 message = 'Wrong password ...'
             elif '未检索到用户账号' in self.text:
@@ -75,7 +79,7 @@ class Core(object):
 
     def get_gate_passcode(self) -> bool:
         try:
-            r = requests.get(self.pass_url.format(self.ptopid, self.sid))
+            r = requests.get(self.pass_url.format(self.ptopid, self.sid),headers=self.HEADERS)
             self.text = r.text.encode(r.encoding).decode(r.apparent_encoding)
             self.bs4 = BeautifulSoup(self.text, 'html.parser')
             div_tag = self.bs4.find('div', attrs={"id": "bak_0"}).find('div')
