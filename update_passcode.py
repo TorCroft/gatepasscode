@@ -4,6 +4,13 @@ import os
 from bs4 import BeautifulSoup
 
 
+def get_user_config() -> dict:
+    if os.getenv("UID_PWD") is None:
+        from dotenv import load_dotenv
+        print("从.env文件中加载环境变量 ...")
+        load_dotenv()
+    return os.getenv('UID_PWD').split('&')
+
 def download_img(image_url):
     response = requests.get(image_url)
     with open('./page/images/passcode.png', 'wb') as f:
@@ -20,15 +27,9 @@ class Core(object):
         }
 
     def __init__(self) -> None:
-        env_uid_pwd = os.environ.get('uid_and_pwd')
-        if env_uid_pwd:
-            uid_pwd = env_uid_pwd.split("&")
-            self.id = uid_pwd[0]
-            self.pwd = uid_pwd[1]
-        else:
-            # 本地运行时使用
-            self.id = input("Input Your Uid >")
-            self.pwd = input("Input Your Password >")
+        uid_pwd = get_user_config()
+        self.id = uid_pwd[0]
+        self.pwd = uid_pwd[1]
 
         self.text = ''
         self.bs4 = None
@@ -53,7 +54,7 @@ class Core(object):
                     raise print('Please check your Internet connection ...')
             else:
                 self.text = r.text.encode(r.encoding).decode(r.apparent_encoding)
-                matchObj = re.match(r'ptopid=(\w+)\&sid=(\w+)\"', self.text)
+                matchObj = re.search(r'ptopid=(\w+)\&sid=(\w+)\"', self.text)
                 break
         try:
             self.ptopid = matchObj.group(1)
@@ -70,7 +71,7 @@ class Core(object):
                 message = "Verification code is required ..."
             else:
                 message = "Unknown reason ..."
-            print(message)
+            print(message,self.text)
             return False
         else:
             print("Successfully logged in ...")
