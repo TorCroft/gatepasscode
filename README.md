@@ -10,9 +10,11 @@ Fork 本仓库，创建一个GitHUb Action(./github/workflows/main.yml)来更新
 git使用的邮箱，具体请参考`./github/workflows/main.yml`，用于git push推送新的通行码图片到仓库（该图片每天一换）。
 * `USERNAME`:
 GitHub的用户名，用于git push推送新的通行码图片到仓库（该图片每天一换）。
+![示例](https://github.com/TorCroft/gatepasscode/blob/main/README_IMAGES/secrets.png)
 
 ### 如何创建一个GitHub Pages来部署静态网站
 * Settings -> Pages -> Build and deployment, Source选择Github Actions，选择静态HTML网站，然后yml文件选择`./github/workflows/static.yml`。
+![示例](https://github.com/TorCroft/gatepasscode/blob/main/README_IMAGES/githubPage.png)
 
 ### 注意
 * 本仓库的GitHub Action是手动关闭的，本人只在需要时才运行Action更新通行码图片。
