@@ -8,7 +8,7 @@ Fork 本仓库，创建一个GitHUb Action(./github/workflows/main.yml)来更新
 * `EMAIL`：git使用的邮箱，具体请参考`./github/workflows/main.yml`，用于git push推送新的通行码图片到仓库（该图片每天一换）。
 * `USERNAME`:GitHub的用户名，用于git push推送新的通行码图片到仓库（该图片每天一换）。
 
-<br>![示例](https://github.com/TorCroft/gatepasscode/blob/main/README_IMAGES/secrets.png)
+<br>![示例](https://github.com/TorCroft/gatepasscode/blob/main/README_IMAGES/secrets.jpg)
 
 ### 如何创建一个GitHub Pages来部署静态网站
 * Settings -> Pages -> Build and deployment
