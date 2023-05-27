@@ -12,7 +12,7 @@ Fork 本仓库，创建一个GitHUb Action(./github/workflows/main.yml)来更新
 
 ### 如何创建一个GitHub Pages来部署静态网站
 * Settings -> Pages -> Build and deployment
-* Source选择`Github Actions`，选择`Static HTML`<br>![示例](https://github.com/TorCroft/gatepasscode/blob/main/README_IMAGES/page.png)
+* Source选择`Github Actions`，选择`Static HTML`<br>![示例](https://github.com/TorCroft/gatepasscode/blob/main/README_IMAGES/page.jpg)
 * 要指定的yml设置为如下内容
 ``` yml
 # Simple workflow for deploying static content to GitHub Pages
