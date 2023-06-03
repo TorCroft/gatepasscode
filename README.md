@@ -21,6 +21,8 @@ name: Deploy static content to Pages
 on:
   workflow_run:
     workflows: ["Update passcode image"]
+    types:
+      - completed
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
