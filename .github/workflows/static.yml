@@ -2,11 +2,8 @@
 name: Deploy static content to Pages
 
 on:
-  schedule:
-    - cron: '25 20 * * *'
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
+  workflow_run:
+    workflows: ["Update passcode image"]
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
