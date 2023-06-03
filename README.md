@@ -19,12 +19,8 @@ Fork 本仓库，创建一个GitHUb Action(./github/workflows/main.yml)来更新
 name: Deploy static content to Pages
 
 on:
-  #定时器，使用UTC时间，这里指定为 UTC时间每天的20：25
-  schedule:
-    - cron: '25 20 * * *'
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
+  workflow_run:
+    workflows: ["Update passcode image"]
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -55,12 +51,14 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          # 指定路径为'./page'
+          # Upload entire repository
           path: './page'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+
 ```
 ### 注意
 * 本仓库的GitHub Action是手动关闭的，本人只在需要时才运行Action更新通行码图片。
-* Action`Update passcode image`运行之后，需要运行`Deploy static content to Pages`才能推送更新后的内容到网站。所以我在`Deploy static content to Pages`中添加了定时器，UTC时间（比北京时间慢8小时）每天的20：25部署内容到网站，`Deploy static content to Pages`在开启的情况下UTC时间每天的20：00运行。
+* ~~Action`Update passcode image`运行之后，需要运行`Deploy static content to Pages`才能推送更新后的内容到网站。所以我在`Deploy static content to Pages`中添加了定时器，UTC时间（比北京时间慢8小时）每天的20：25部署内容到网站，`Deploy static content to Pages`在开启的情况下UTC时间每天的20：00运行。~~
+* 在`static.yml`中添加了workflow_run触发器，Action `Update passcode image`运行完毕后会触发`Deploy static content to Pages`的运行。
