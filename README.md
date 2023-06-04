@@ -53,7 +53,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          # Upload entire repository
+          # Upload ./page
           path: './page'
       - name: Deploy to GitHub Pages
         id: deployment
@@ -61,6 +61,18 @@ jobs:
 
 ```
 ### 注意
-* 本仓库的GitHub Action是手动关闭的，本人只在需要时才运行Action更新通行码图片。
-* ~~Action`Update passcode image`运行之后，需要运行`Deploy static content to Pages`才能推送更新后的内容到网站。所以我在`Deploy static content to Pages`中添加了定时器，UTC时间（比北京时间慢8小时）每天的20：25部署内容到网站，`Deploy static content to Pages`在开启的情况下UTC时间每天的20：00运行。~~
+* 本仓库的GitHub Action的触发器中不再包含定时器，本人只在需要时运行Action更新通行码图片。iOS可使用[Shortcuts](https://apps.apple.com/app/shortcuts/id915249334) APP，利用API触发。如何使用API请参考[GitHub Workflow API文档](https://docs.github.com/en/rest/actions/workflows?apiVersion=2022-11-28#create-a-workflow-dispatch-event)。<br>如需要定时器，请自行在Action`Update passcode image`中的`on`添加以下代码
+``` yaml
+  schedule:
+    - cron: '0 20 * * *'
+```
+修改后为
+``` yaml
+on:
+  # 手动触发入口
+  workflow_dispatch:
+  # 定时器，UTC时间每天的20:00
+  schedule:
+    - cron: '0 20 * * *'
+```
 * 在`static.yml`中添加了workflow_run触发器，Action `Update passcode image`运行完毕后会触发`Deploy static content to Pages`的运行。
