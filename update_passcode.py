@@ -11,7 +11,9 @@ def get_user_config():
         load_dotenv()
     return os.getenv('UID_PWD').split('&')
 
+
 def download_img(image_url):
+    print(f"Downloading image from {image_url}")
     response = requests.get(image_url)
     with open('./page/images/passcode.png', 'wb') as f:
         f.write(response.content)
@@ -21,10 +23,10 @@ def download_img(image_url):
 
 class Core(object):
     HEADERS = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:98.0) Gecko/20100101 Firefox/98.0',
-            'referer': 'https://jksb.v.zzu.edu.cn/vls6sss/zzujksb.dll/first0?fun2=a',
-            "Content-Type": 'application/x-www-form-urlencoded'
-        }
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:98.0) Gecko/20100101 Firefox/98.0',
+        'referer': 'https://jksb.v.zzu.edu.cn/vls6sss/zzujksb.dll/first0?fun2=a',
+        "Content-Type": 'application/x-www-form-urlencoded'
+    }
 
     def __init__(self) -> None:
         uid_pwd = get_user_config()

@@ -3,7 +3,7 @@
 
 ## Usage
 Fork 本仓库，创建一个GitHUb Action(./github/workflows/main.yml)来更新每天的通行码。
-需要三个secrets变量，分别为`UID_PWD`,`EMAIL`,`USERNAME`
+需要三个secrets变量，分别为`UID_PWD`,`EMAIL`,`USERNAME`。
 * `UID_PWD`：账号密码都是健康打卡平台的，将你的账号密码使用`&`拼接起来。<br>Exp: 你的账号是123456789，密码是password，那么`UID_PWD`的值应该是`123456789&password`，密码默认是身份证后八位。用于Python脚本爬取新的通行码图片。
 * `EMAIL`：git使用的邮箱，具体请参考`./github/workflows/main.yml`，用于git push推送新的通行码图片到仓库（该图片每天一换）。
 * `USERNAME`:GitHub的用户名，用于git push推送新的通行码图片到仓库（该图片每天一换）。
@@ -12,7 +12,7 @@ Fork 本仓库，创建一个GitHUb Action(./github/workflows/main.yml)来更新
 
 ### 如何创建一个GitHub Pages来部署静态网站
 * Settings -> Pages -> Build and deployment
-* Source选择`Github Actions`，选择`Static HTML`<br>![示例](https://github.com/TorCroft/gatepasscode/blob/main/README_IMAGES/page.jpg)
+* Source选择`Github Actions`，选择`Static HTML`<br>![](https://github.com/TorCroft/gatepasscode/blob/main/README_IMAGES/page.jpg)
 * 要指定的yml设置为如下内容
 ``` yml
 # Simple workflow for deploying static content to GitHub Pages
@@ -61,7 +61,7 @@ jobs:
 
 ```
 ### 注意
-* 本仓库的GitHub Action的触发器中不再包含定时器，本人只在需要时运行Action更新通行码图片。iOS可使用[Shortcuts](https://apps.apple.com/app/shortcuts/id915249334) APP，利用API触发。如何使用API请参考[GitHub Workflow API文档](https://docs.github.com/en/rest/actions/workflows?apiVersion=2022-11-28#create-a-workflow-dispatch-event)。<br>如需要定时器，请自行在Action`Update passcode image`中的`on`添加以下代码
+* 本仓库的GitHub Action的触发器中不再包含定时器，本人只在需要时运行Action更新通行码图片。iOS可使用[Shortcuts](https://apps.apple.com/app/shortcuts/id915249334) APP，利用API触发。这里给出示例 [API触发Workflow](https://github.com/TorCroft/gatepasscode/blob/main/How-to-Run-Workflow-via-API.md) ，示例中包含使用Python和Shortcuts请求API触发Workflow。<br>如需要定时器，请自行在Action`Update passcode image`中的`on`添加以下代码
 ``` yaml
   schedule:
     - cron: '0 20 * * *'
