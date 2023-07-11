@@ -22,7 +22,7 @@ def download_img(image_url):
 
 
 class Core(object):
-    HEADERS = {
+    header = {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:98.0) Gecko/20100101 Firefox/98.0',
         'referer': 'https://jksb.v.zzu.edu.cn/vls6sss/zzujksb.dll/first0?fun2=a',
         "Content-Type": 'application/x-www-form-urlencoded'
@@ -50,7 +50,7 @@ class Core(object):
         }
         for i in range(3):
             try:
-                r = requests.post(self.login_url, headers=self.HEADERS, data=self.form, timeout=(200, 200))
+                r = requests.post(self.login_url, headers=self.header, data=self.form, timeout=(200, 200))
             except:
                 if i == 2:
                     raise print('Please check your Internet connection ...')
@@ -81,7 +81,7 @@ class Core(object):
 
     def get_gate_passcode(self) -> bool:
         try:
-            r = requests.get(self.pass_url.format(self.ptopid, self.sid),headers=self.HEADERS)
+            r = requests.get(self.pass_url.format(self.ptopid, self.sid),headers=self.header)
             self.text = r.text.encode(r.encoding).decode(r.apparent_encoding)
             self.bs4 = BeautifulSoup(self.text, 'html.parser')
             div_tag = self.bs4.find('div', attrs={"id": "bak_0"}).find('div')
