@@ -48,14 +48,39 @@ if __name__ == "__main__":
     create_a_workflow_dispatch_event(
         owner='TorCroft',
         repo='gatepasscode',
-        access_token='Your own github access token',
+        access_token='Your github access token',
         workflow_id='main.yml'
     )
 
 ```
 
 ## Create a workflow dispatch event via iOS Shortcuts
-![](https://github.com/TorCroft/gatepasscode/blob/main/README_IMAGES/shortcuts_eg_1.png)
-* 这里的`Dictionary`包含你的Workflow信息，可存放多个Workflow，每个键值对以`string: dict`的形式存放。`string`是自己指定的的Workflow名称，`dict`是该Workflow需要包含的信息，包含`owner`, `repo`, `workflowID`, `token`, `ref` 五项。
-### 这是一个Workflow示例
-![](https://github.com/TorCroft/gatepasscode/blob/main/README_IMAGES/shortcuts_eg_2.png)
+* 创建一个json文件存放你所有的Workflow信息，下面是一个示例，取名为`config.json`。
+``` json
+{
+    "EpicGamesHelper": {
+        "owner": "TorCroft",
+        "repo": "EpicGamesHelper",
+        "workflowID": "55830746",
+        "token": "Your github access token",
+        "ref": "main"
+    },
+    "GatePasscode": {
+        "owner": "TorCroft",
+        "repo": "gatepasscode",
+        "workflowID": "51821099",   // "main.yml" also works.
+        "token": "Your github access token",
+        "ref": "main"
+    },
+    "name_of_your_Workflow": {
+        "owner": "",
+        "repo": "",
+        "workflowID": "",
+        "token": "Your github access token",
+        "ref": "main"
+    }
+}
+```
+* 将上述`config.json`存放到[iCloud Drive](https://www.icloud.com.cn/iclouddrive/)中，例如，我存放的路径为`iCloudDrive > Shortcuts Config > config`。
+* 在你的iOS设备上[添加捷径](https://www.icloud.com/shortcuts/1e47d37b0cbd41a8b8e213bfec2b7661)，指定`config.json`的文件路径，然后保存即可。
+![](https://github.com/TorCroft/gatepasscode/blob/main/README_IMAGES/shortcuts_eg.png)
