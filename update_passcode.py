@@ -5,9 +5,10 @@ import json
 from bs4 import BeautifulSoup
 from datetime import datetime, timezone
 
-def write_time_info_into_config():
+def write_info_into_config(**kwargs):
     config = {
-        "last_update_time": datetime.strftime(datetime.utcnow().replace(tzinfo=timezone.utc), "%Y-%m-%d %H:%M:%S %Z")
+        "last_update_time": datetime.strftime(datetime.utcnow().replace(tzinfo=timezone.utc), "%Y-%m-%d %H:%M:%S %Z"),
+        **kwargs
     }
     with open('./page/config.json', 'w', encoding='utf-8') as config_file:
         json.dump(config, config_file)
@@ -48,6 +49,7 @@ class Core(object):
         self.base_url = "https://jksb.v.zzu.edu.cn"
         self.login_url = self.base_url + "/vls6sss/zzujksb.dll/login"
         self.pass_url = self.base_url + "/vls6sss/zzujksb.dll/gettongxing?ptopid={}&door=0001&sid={}"
+        self.code_url = ""
 
     def login(self) -> bool:
         self.form = {
@@ -93,8 +95,8 @@ class Core(object):
             self.text = r.text.encode(r.encoding).decode(r.apparent_encoding)
             self.bs4 = BeautifulSoup(self.text, 'html.parser')
             div_tag = self.bs4.find('div', attrs={"id": "bak_0"}).find('div')
-            code_url = self.base_url + div_tag['style'].split('url(')[1].split(')')[0]
-            return download_img(code_url)
+            self.code_url:str = self.base_url + div_tag['style'].split('url(')[1].split(')')[0]
+            return download_img(self.code_url)
         except Exception as e:
             print(f'Download failed ... {e}')
             return False
@@ -111,4 +113,4 @@ class Core(object):
 if __name__ == "__main__":
     test_user = Core()
     test_user.run()
-    write_time_info_into_config()
+    write_info_into_config(passcode_url=test_user.code_url)

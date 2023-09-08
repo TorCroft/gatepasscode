@@ -32,9 +32,6 @@
             const today = utcPlus8Time.startOf('day');
             const yesterday = today.clone().subtract(1, 'day');
             const daysDifference = utcPlus8Time.diff(givenDate, 'days');
-            const passcode_img_url = "./images/passcode.png?date=" + givenDate.format("YYYYMMDD");
-            document.getElementById('passcode_img_preload').src = passcode_img_url;
-            document.getElementById('passcodeImg').style.backgroundImage = `url(${passcode_img_url})`;
             
             if (givenDate.isSameOrAfter(today)) {
                 return "今天";
@@ -76,6 +73,18 @@
             const minutes = PrefixInteger(myDate.getMinutes());
             const currentTime = document.getElementById("current_time");
             currentTime.innerHTML = "(" + month + "月" + day + "日" + " " + hours + ":" + minutes + "获取)";
+        }
+        function checkImgExists(imgurl) {
+            return new Promise(function (resolve, reject) {
+                var ImgObj = new Image()
+                ImgObj.src = imgurl
+                ImgObj.onload = function (res) {
+                    resolve(res)
+                }
+                ImgObj.onerror = function (err) {
+                    reject(err)
+                }
+            })
         }
         function changeLocation(selectedValue) {
             const locationElement = document.getElementById("location");
@@ -193,7 +202,17 @@
         getConfig('./config.json')
             .then(config => {
                 const lastUpdateTimeLabel = document.getElementById('last_update_time');
+                const passcode_url = config.passcode_url;
                 lastUpdateTimeLabel.textContent = handleDatetime(config.last_update_time);
+                checkImgExists(passcode_url).then(()=>{
+                    //success callback
+                    document.getElementById('passcodeImg').style.backgroundImage = `url(${passcode_img_url})`;
+                }).catch(()=>{
+                    //fail callback
+                    const passcode_path = "./images/passcode.png";
+                    document.getElementById('passcode_img_preload').src = passcode_path;
+                    document.getElementById('passcodeImg').style.backgroundImage = `url(${passcode_path})`;
+                })
             });
     </script>
 </body>
