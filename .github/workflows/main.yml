@@ -30,7 +30,7 @@ jobs:
         env:
           UID_PWD: ${{ secrets.UID_PWD }}
         run: |
-          python3 ./update_passcode.py
+          python3 ./index.py
 
       - name: Push if there are any changes
         run: |

@@ -20,7 +20,7 @@ Fork 本仓库，创建一个GitHUb Action(./github/workflows/main.yml)来更新
 * 要指定的yml设置为如下内容
 ``` yml
 # Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+name: Deploy HTML to Pages
 
 on:
   workflow_run:
@@ -62,7 +62,6 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
-
 ```
 ### 注意
 * 如需要定时器，请自行在Action`Update passcode image`中的`on`添加以下代码
@@ -79,4 +78,4 @@ on:
   schedule:
     - cron: '0 20 * * *'
 ```
-* 在`static.yml`中添加了workflow_run触发器，Action `Update passcode image`运行完毕后会触发`Deploy static content to Pages`的运行。
+* 在`deploy-github-pages.yml`中添加了workflow_run触发器，Action `Update passcode image`运行完毕后会触发`Deploy HTML to Pages`的运行。
