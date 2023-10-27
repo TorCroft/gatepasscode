@@ -2,7 +2,7 @@
 郑州大学主校区通行码，适配北门、东门、南门。
 
 * 本仓库的GitHub Action的触发器中不再包含定时器，本人只在需要时运行Action更新通行码图片。iOS可使用[Shortcuts](https://apps.apple.com/app/shortcuts/id915249334) APP，利用API触发。这里给出示例 [API触发Workflow](https://github.com/TorCroft/gatepasscode/blob/main/How-to-Run-Workflow-via-API.md) ，示例中包含使用Python和Shortcuts请求API触发Workflow。
-### [GitHub Pages 部署成果](https://torcroft.github.io/gatepasscode/)
+### [GitHub Pages 部署成果](https://190854876.github.io/gatepasscode/)
 ![示例](https://github.com/TorCroft/gatepasscode/blob/main/README_IMAGES/WebsitePreview.png)
 
 ## Usage
