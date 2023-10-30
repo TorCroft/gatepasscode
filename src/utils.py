@@ -1,12 +1,12 @@
 import requests
 import os
 import json
-from datetime import datetime, timezone
+from datetime import datetime, UTC
 from .logger import logger
 
 
 def utc_time_string():
-    utc_time = datetime.utcnow().replace(tzinfo=timezone.utc)
+    utc_time = datetime.now(UTC)
     return datetime.strftime(utc_time, "%Y-%m-%d %H:%M:%S %Z")
 
 
