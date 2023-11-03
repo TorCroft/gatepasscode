@@ -1,7 +1,9 @@
 # gatepasscode
-郑州大学主校区通行码，适配北门、东门、南门。
+郑州大学主校区入校通行码，适配北门、东门、南门。
 
-* 本仓库的GitHub Action的触发器中不再包含定时器，本人只在需要时运行Action更新通行码图片。iOS可使用[Shortcuts](https://apps.apple.com/app/shortcuts/id915249334) APP，利用API触发。这里给出示例 [API触发Workflow](https://github.com/TorCroft/gatepasscode/blob/main/How-to-Run-Workflow-via-API.md) ，示例中包含使用Python和Shortcuts请求API触发Workflow。
+### 本人其他相关项目
+* [郑州大学空教室查询](https://github.com/TorCroft/ZZU-ClassRoom)，查询特定教学楼空教室。
+* [郑州大学移动校园API](https://github.com/TorCroft/ZZU-API)，提供空教室查询、成绩查询、课表查询等服务。
 ### [GitHub Pages 部署成果](https://torcroft.github.io/gatepasscode/)
 ![示例](https://github.com/TorCroft/gatepasscode/blob/main/README_IMAGES/WebsitePreview.png)
 
@@ -64,6 +66,7 @@ jobs:
         uses: actions/deploy-pages@v2
 ```
 ### 注意
+* 本仓库的GitHub Action的触发器中不再包含定时器，本人只在需要时运行Action更新通行码图片。iOS可使用[Shortcuts](https://apps.apple.com/app/shortcuts/id915249334) APP，利用API触发。这里给出示例 [API触发Workflow](https://github.com/TorCroft/gatepasscode/blob/main/How-to-Run-Workflow-via-API.md) ，示例中包含使用Python和Shortcuts请求API触发Workflow。
 * 如需要定时器，请自行在Action`Update passcode image`中的`on`添加以下代码
 ``` yaml
   schedule:
