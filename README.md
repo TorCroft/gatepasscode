@@ -6,18 +6,18 @@
 * [郑州大学空教室查询](https://github.com/TorCroft/ZZU-ClassRoom)，查询特定教学楼空教室。
 * [郑州大学移动校园API](https://github.com/TorCroft/ZZU-API)，提供空教室查询、成绩查询、课表查询等服务。
 ### [GitHub Pages 部署成果](https://torcroft.github.io/gatepasscode/)
-![示例](https://github.com/TorCroft/gatepasscode/blob/main/README_IMAGES/WebsitePreview.png)
+![WebsitePreview](./README_IMAGES/WebsitePreview.png)
 
 ## Usage
 Fork 本仓库，创建一个GitHUb Action(./github/workflows/main.yml)来更新每天的通行码。
 需要名为`UID_PWD`的secrets变量。
 * `UID_PWD`：账号密码都是健康打卡平台的，将你的账号密码使用`&`拼接起来。<br>Exp: 你的账号是123456789，密码是password，那么`UID_PWD`的值应该是`123456789&password`，密码默认是身份证后八位。用于Python脚本爬取新的通行码图片。
 
-<br>![示例](https://github.com/TorCroft/gatepasscode/blob/main/README_IMAGES/secrets.jpg)
+<br>![Secrets Example](./README_IMAGES/secrets.jpg)
 
 ### 如何创建一个GitHub Pages来部署静态网站
 * Settings -> Pages -> Build and deployment
-* Source选择`Github Actions`，选择`Static HTML`<br>![](https://github.com/TorCroft/gatepasscode/blob/main/README_IMAGES/page.jpg)
+* Source选择`Github Actions`，选择`Static HTML`<br>![](./README_IMAGES/page.jpg)
 * 要指定的yml设置为如下内容
 ``` yaml
 name: Update and Deploy to Pages

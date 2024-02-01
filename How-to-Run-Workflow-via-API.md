@@ -83,4 +83,4 @@ if __name__ == "__main__":
 ```
 * 将上述`config.json`存放到[iCloud Drive](https://www.icloud.com.cn/iclouddrive/)中，例如，我存放的路径为`iCloudDrive > Shortcuts Config > config`。
 * 在你的iOS设备上[添加捷径](https://www.icloud.com/shortcuts/1e47d37b0cbd41a8b8e213bfec2b7661)，指定`config.json`的文件路径，然后保存即可。
-![](https://github.com/TorCroft/gatepasscode/blob/main/README_IMAGES/shortcuts_eg.png)
+![](./README_IMAGES/shortcuts_eg.png)
