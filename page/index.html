@@ -141,8 +141,8 @@
             <div style="text-align: center;"><label>通行码最后更新于</label><label id="last_update_time"></label></div><br>
             <div class="info-item"><label for="name">大门：<select name='gate' onchange="changeLocation(this.value)"><option value='east' selected='selected'>东门</option><option value='north'>北门</option><option value='south'>南门</option></select></label><br></div>
             <div class="info-item"><label for="identity">身份：<select name='identity' onchange="changeIdentity(this.value)"><option value='0' selected='selected'>本科生</option><option value='1'>研究生</option></select></label><br></div>
-            <div class="info-item"><label for="name">姓名：<input type="text" id="name" name="name" placeholder="杰森"></label><br></div>
-            <div class="info-item"><label for="college">学院：<input type="text" id="college" name="college" placeholder="电气信息学院"></label><br></div>
+            <div class="info-item"><label for="name">姓名：<input type="text" id="name" name="name"></label><br></div>
+            <div class="info-item"><label for="college">学院：<input type="text" id="college" name="college"></label><br></div>
             <div class="info-submit" style="text-align: center;"><button type="submit">生成通行码</button></div>
         </form>
         <div style="width:0;height:0;display: none;">
@@ -185,6 +185,8 @@
             郑州大学疫情防控领导小组、保卫处、信息化办公室</div>
     </div>
     <script>
+        const namePlaceholder = "杰森";
+        const collegeName = "电气信息学院";
         const interface = document.getElementById('interface');
         const gatepasscode = document.getElementById('gatepasscode');
         const form = document.getElementById('info_form');
@@ -192,13 +194,17 @@
         const border_2 = document.getElementById('bian92b1');
         const border_3 = document.getElementById('bian92b2');
         const border_4 = document.getElementById('bian92c');
+        const nameInput = document.getElementById("name");
+        const collegeInput = document.getElementById("college");
+        nameInput.placeholder = namePlaceholder;
+        collegeInput.placeholder = collegeName;
         form.addEventListener("submit", function (event) {
             event.preventDefault();
-            let name = document.getElementById("name").value;
-            let college = document.getElementById("college").value;
-            name = name ? name : "杰森";
-            college = college ? college : "电气信息学院";
-            document.getElementById("college_and_name").innerHTML = college + "." + name;
+            let nameText = nameInput.value;
+            let collegeText = collegeInput.value;
+            nameText = nameText ? nameText : namePlaceholder;
+            collegeText = collegeText ? collegeText : collegeName;
+            document.getElementById("college_and_name").innerHTML = collegeText + "." + nameText;
             if (isCodeExpired) alert("通行码图片已过期，需要更新！");
             generate_passcode();
         });
