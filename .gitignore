@@ -1,8 +1,9 @@
 # Docs builded
 docs/build/
 
-test*.py
 logs
+pytest*.py
+page/config.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -11,7 +12,6 @@ __pycache__/
 
 # C extensions
 *.so
-pytest/
 
 # Distribution / packaging
 .Python

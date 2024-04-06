@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>郑州大学数据中台2021</title>
+    <title>郑州大学数据中台</title>
     <link rel="stylesheet" href="./css/interface_style.css">
     <link rel="stylesheet" href="./css/passcode_style.css">
     <link rel="shortcut icon" href="./cxk_icon.ico" type="image/x-icon">
@@ -138,13 +138,15 @@
             <div style="text-align: center;"><label id="image_select"><input type="file" id="photo" onchange="handleFiles()" accept="image/*" style="display: none;">更改图片</label></div>
         </div>
         <form id="info_form">
-            <div style="text-align: center;"><label>通行码最后更新于</label><label id="last_update_time"></label></div><br>
+            <div style="text-align: center;"><label>通行码最后更新于</label><label id="last_update_time"></label></div>
+            <div class="info-item" id="info-display"><label>Deployed by <a id="actor">Actor</a></label></div>
             <div class="info-item"><label for="name">大门：<select name='gate' onchange="changeLocation(this.value)"><option value='east' selected='selected'>东门</option><option value='north'>北门</option><option value='south'>南门</option></select></label><br></div>
             <div class="info-item"><label for="identity">身份：<select name='identity' onchange="changeIdentity(this.value)"><option value='0' selected='selected'>本科生</option><option value='1'>研究生</option></select></label><br></div>
             <div class="info-item"><label for="name">姓名：<input type="text" id="name" name="name"></label><br></div>
             <div class="info-item"><label for="college">学院：<input type="text" id="college" name="college"></label><br></div>
             <div class="info-submit" style="text-align: center;"><button type="submit">生成通行码</button></div>
         </form>
+        
         <div style="width:0;height:0;display: none;">
             <img id="passcode_img_preload" alt="preImg"><img src="./images/sheng.png" alt="preImg"><img src="./images/split.png" alt="preImg">
         </div>
@@ -211,6 +213,9 @@
         getConfig('./config.json')
             .then(config => {
                 const lastUpdateTimeLabel = document.getElementById('last_update_time');
+                const actor = document.getElementById('actor');
+                actor.textContent = config.actor;
+                actor.href = "https://github.com/" + config.actor;
                 const passcode_url = config.passcode_url;
                 lastUpdateTimeLabel.textContent = handleDatetime(config.last_update_time);
                 checkImgExists(passcode_url).then(() => {

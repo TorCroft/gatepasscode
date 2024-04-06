@@ -1,6 +1,6 @@
 import requests
-import os
 import json
+from os import getenv
 from datetime import datetime, UTC
 from .logger import logger
 
@@ -13,6 +13,7 @@ def utc_time_string():
 def write_info_into_config(**kwargs):
     config = {
         "last_update_time": utc_time_string(),
+        "actor": getenv("GITHUB_ACTOR"),
         **kwargs,
     }
     with open("./page/config.json", "w", encoding="utf-8") as config_file:
@@ -20,12 +21,12 @@ def write_info_into_config(**kwargs):
 
 
 def get_user_config():
-    if os.getenv("UID_PWD") is None:
+    if (uid_pid := getenv("UID_PWD")) is None:
         from dotenv import load_dotenv
 
         logger.info("从.env文件中加载环境变量 ...")
         load_dotenv()
-    return os.getenv("UID_PWD").split("&")
+    return uid_pid.split("&")
 
 
 def download_img(image_url):
