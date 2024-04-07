@@ -53,6 +53,7 @@ jobs:
         run: |
           cd gatepasscode
           python ./index.py
+          python ./markdown.py >> $GITHUB_STEP_SUMMARY
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
