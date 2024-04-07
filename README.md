@@ -15,7 +15,7 @@
 * 添加名为`UID_PWD`的secrets变量。定位到Settings -> Secrets and variables -> Actions，选择New repository secret（绿色的按钮）。`UID_PWD`：账号密码都是健康打卡平台的，将你的账号密码使用`&`拼接起来。<br>Exp: 你的账号是123456789，密码是password，那么`UID_PWD`的值应该是`123456789&password`，密码默认是身份证后八位。用于Python脚本爬取新的通行码图片。
 <br><img src="./README_IMAGES/secrets.jpg" alt="Secrets Example" style="max-width: 800px; max-height: 600px;">
 
-* 使用Github Action老部署静态HTML网页。定位到 Settings  -> Pages，在 Build and deployment 一栏中，Source 选择`Github Actions`，然后选择`Static HTML`。<br><img src="./README_IMAGES/page.jpg" alt="Page Example" style="max-width: 800px; max-height: 600px;"><br>要指定的yml设置为如下内容
+* 使用 Github Action 来部署静态HTML网页。定位到 Settings  -> Pages，在 Build and deployment 一栏中，Source 选择`Github Actions`，然后选择`Static HTML`，然后会自动为你添加一个Workflow（yml文件）。<br><img src="./README_IMAGES/page.jpg" alt="Page Example" style="max-width: 800px; max-height: 600px;"><br>要指定的yml设置为如下内容
 
 ``` yaml
 name: Deploy GatePasscode
