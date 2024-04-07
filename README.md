@@ -31,6 +31,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions: write-all
+    outputs:
+      status: ${{ steps.pyscripts.conclusion }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -48,23 +50,26 @@ jobs:
           if [ -f $requirements_file ]; then pip install -r $requirements_file; fi
 
       - name: Run Python Script
+        id: pyscripts
         env:
           UID_PWD: ${{ secrets.UID_PWD }}
         run: |
           cd gatepasscode
-          python ./index.py
-          python ./markdown.py >> $GITHUB_STEP_SUMMARY
+          python ./index.py >> $GITHUB_STEP_SUMMARY
 
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        if: steps.pyscripts.conclusion == 'success'
+        uses: actions/configure-pages@v5
 
       - name: Upload artifact
+        if: steps.pyscripts.conclusion == 'success'
         uses: actions/upload-pages-artifact@v3
         with:
           path: "./gatepasscode/page"
 
   deploy:
     needs: build
+    if: needs.build.outputs.status == 'success'
     permissions:
       pages: write
       id-token: write
@@ -76,6 +81,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
 ```
 ### 注意
 * GitHub Action的触发器中不再包含定时器，本人只在需要时运行Action更新通行码图片。iOS可使用[Shortcuts](https://apps.apple.com/app/shortcuts/id915249334) APP，利用API触发。这里给出示例 [API触发Workflow](https://github.com/TorCroft/gatepasscode/blob/main/How-to-Run-Workflow-via-API.md) ，示例中包含使用Python和Shortcuts请求API触发Workflow。

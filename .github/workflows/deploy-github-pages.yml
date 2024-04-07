@@ -11,6 +11,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions: write-all
+    outputs:
+      status: ${{ steps.pyscripts.conclusion }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,22 +28,24 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Run Python Script
+        id: pyscripts
         env:
           UID_PWD: ${{ secrets.UID_PWD }}
-        run: |
-          python index.py
-          python markdown.py >> $GITHUB_STEP_SUMMARY
+        run: python index.py >> $GITHUB_STEP_SUMMARY
       
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        if: steps.pyscripts.conclusion == 'success'
+        uses: actions/configure-pages@v5
 
       - name: Upload artifact
+        if: steps.pyscripts.conclusion == 'success'
         uses: actions/upload-pages-artifact@v3
         with:
           path: "./page"
 
   deploy:
     needs: build
+    if: needs.build.outputs.status == 'success'
     permissions:
       pages: write
       id-token: write
