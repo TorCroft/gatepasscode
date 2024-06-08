@@ -1,13 +1,12 @@
 # gatepasscode
 郑州大学主校区入校通行码，适配北门、东门、南门。
-## Update
-本项目的secrets变量仅需`UID_PWD`。
+
 ### 本人其他相关项目
 * [郑州大学空教室查询](https://github.com/TorCroft/ZZU-ClassRoom)，查询特定教学楼空教室。
 * [郑州大学移动校园API](https://github.com/TorCroft/ZZU-API)，提供空教室查询、成绩查询、课表查询等服务。
+
 ### 预览
 <img src="./README_IMAGES/WebsitePreview.png" alt="Website Preview" style="max-width: 800px; max-height: 600px;">
-
 
 ## Usage
 * 创建一个空仓库

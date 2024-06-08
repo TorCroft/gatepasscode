@@ -15,17 +15,20 @@
         let flip = true;
         let isCodeExpired = false;
         let localPasscodeImgPath;
+
         function flipEvent() {
             flip = !flip;
             if (flip) border_1.style.backgroundColor = border_2.style.backgroundColor = border_3.style.backgroundColor = border_4.style.backgroundColor = "#bfffc8";
             else border_1.style.backgroundColor = border_2.style.backgroundColor = border_3.style.backgroundColor = border_4.style.backgroundColor = "#090";
         }
+
         function getConfig(url) {
             return fetch(url, { cache: "no-store" }).then(response => {
                 if (!response.ok) { throw new Error('Unable to get config data.'); }
                 return response.json();
             });
         }
+        
         function handleDatetime(inputDate) {
             const utcTime = moment.utc();
             const utcPlus8Time = moment(utcTime).utcOffset(8);
@@ -52,6 +55,7 @@
                 }
             }
         }
+
         function handleFiles() {
             const photo = document.getElementById("photo").files[0];
             const reader = new FileReader();
@@ -64,9 +68,11 @@
             };
             reader.readAsDataURL(photo);
         }
+
         function PrefixInteger(num) {
             return (Array(2).join('0') + num).slice(-2);
         }
+
         function showTime() {
             const myDate = new Date();
             const month = PrefixInteger(myDate.getMonth() + 1);
@@ -76,6 +82,7 @@
             const currentTime = document.getElementById("current_time");
             currentTime.innerHTML = "(" + month + "月" + day + "日" + " " + hours + ":" + minutes + "获取)";
         }
+
         function checkImgExists(imgurl) {
             return new Promise(function (resolve, reject) {
                 var ImgObj = new Image()
@@ -88,15 +95,7 @@
                 }
             })
         }
-        function changeIdentity(selectedValue) {
-            const identityElement = document.getElementById("identity");
-            if (selectedValue === '0') {
-                identityElement.innerText = "本科生";
-            }
-            else {
-                identityElement.innerText = "研究生";
-            }
-        }
+
         function changeLocation(selectedValue) {
             const locationElement = document.getElementById("location");
             const mainGate = document.getElementById("gate");
@@ -115,6 +114,7 @@
                     break;
             }
         }
+
         function generate_passcode() {
             timerID = setInterval("flipEvent()", 1000);
             flipEvent();
@@ -122,6 +122,7 @@
             interface.style.display = 'none';
             gatepasscode.style.display = 'block';
         }
+
         function return_to_interface() {
             clearInterval(timerID);
             gatepasscode.style.display = 'none';
@@ -141,23 +142,24 @@
             <div style="text-align: center;"><label>通行码最后更新于</label><label id="last_update_time"></label></div>
             <div class="info-item" id="info-display"><label>Deployed by <a id="actor">Actor</a></label></div>
             <div class="info-item"><label for="name">大门：<select name='gate' onchange="changeLocation(this.value)"><option value='east' selected='selected'>东门</option><option value='north'>北门</option><option value='south'>南门</option></select></label><br></div>
-            <div class="info-item"><label for="identity">身份：<select name='identity' onchange="changeIdentity(this.value)"><option value='0' selected='selected'>本科生</option><option value='1'>研究生</option></select></label><br></div>
+            <div class="info-item"><label for="identity">身份：<select name='identity' onchange="changeIdentity(this.value)"><option value='0' selected='selected'>本科生</option><option value='1'>研究生</option><option value='2'>访客</option></select></label><br></div>
             <div class="info-item"><label for="name">姓名：<input type="text" id="name" name="name"></label><br></div>
             <div class="info-item"><label for="college">学院：<input type="text" id="college" name="college"></label><br></div>
             <div class="info-submit" style="text-align: center;"><button type="submit">生成通行码</button></div>
         </form>
-        
+
         <div style="width:0;height:0;display: none;">
             <img id="passcode_img_preload" alt="preImg"><img src="./images/sheng.png" alt="preImg"><img src="./images/split.png" alt="preImg">
         </div>
     </div>
+
     <div id="gatepasscode" style="display: none;">
         <div id="passcodeImg" style="width:100%;height:88px;"></div>
         <div style="width:100%;height:7px;BACKGROUND-IMAGE: url(./images/split.png)"></div>
         <div style="width:100%; min-height:90px;">
             <div style="width:100%;height:6px;text-align:left;"></div>
             <div style="width:100%;min-height:26px;line-height:26px;font-size:16px;color:#00c;font-weight:500;font-family:黑体;BACKGROUND-IMAGE:url(./images/sheng.png)">
-                <span id="college_and_name" style="color:#00a">college.name</span>　<a href="javascript:return_to_interface();"><span style="font-size:12px;;color:#00c;">〖切换账号〗</span></a><br>主校区大门<span id="gate">东门</span>.<span style="background-color:#070;color:#ff0">入口</span><br>身份：正常出入校园<span id="identity">本科生</span><span style="font-size:12px;color:#333;" id="current_time">(00月00日 00:00获取)</span><br><span style="color:#f00;font-size:12px">提醒：未检索到你今日出校记录</span>
+                <span id="college_and_name" style="color:#00a">college.name</span>　<a href="javascript:return_to_interface();"><span style="font-size:12px;;color:#00c;">〖切换账号〗</span></a><br>主校区大门<span id="gate">东门</span>.<span style="background-color:#070;color:#ff0">入口</span><br>身份：<span id="identity">本科生</span><span style="font-size:12px;color:#333;" id="current_time">(00月00日 00:00获取)</span><br><span style="color:#f00;font-size:12px">提醒：未检索到你今日出校记录</span>
             </div>
         </div>
         <div style="width: 100%; height: 15px; background-color: rgb(0, 153, 0);" id="bian92a"></div>
@@ -186,6 +188,7 @@
         <div style="width:100%;min-height:18px;line-height:18px;font-size:12px;color:#666;text-align:center">
             郑州大学疫情防控领导小组、保卫处、信息化办公室</div>
     </div>
+
     <script>
         const namePlaceholder = "杰森";
         const collegeName = "电气信息学院";
@@ -198,8 +201,14 @@
         const border_4 = document.getElementById('bian92c');
         const nameInput = document.getElementById("name");
         const collegeInput = document.getElementById("college");
+        const identityElement = document.getElementById("identity");
+        const passcodeImg = document.getElementById('passcodeImg');
+
+        let passcodeUrl;
+
         nameInput.placeholder = namePlaceholder;
         collegeInput.placeholder = collegeName;
+
         form.addEventListener("submit", function (event) {
             event.preventDefault();
             let nameText = nameInput.value;
@@ -210,23 +219,36 @@
             if (isCodeExpired) alert("通行码图片已过期，需要更新！");
             generate_passcode();
         });
+
+        function changeIdentity(selectedValue) {
+            const identities = {
+                '0': { text: "正常出入校园本科生", imgUrl: passcodeUrl },
+                '1': { text: "正常出入校园研究生", imgUrl: passcodeUrl },
+                'default': { text: "访客", imgUrl: "https://jksb.v.zzu.edu.cn/imagesss/title316_00001.png" }
+            };
+            const selectedIdentity = identities[selectedValue] || identities['default'];
+            identityElement.innerText = selectedIdentity.text;
+            passcodeImg.style.backgroundImage = `url(${selectedIdentity.imgUrl})`;
+        }
+
         getConfig('./config.json')
             .then(config => {
                 const lastUpdateTimeLabel = document.getElementById('last_update_time');
                 const actor = document.getElementById('actor');
                 actor.textContent = config.actor;
                 actor.href = "https://github.com/" + config.actor;
-                const passcode_url = config.passcode_url;
+                passcodeUrl = config.passcode_url;
                 lastUpdateTimeLabel.textContent = handleDatetime(config.last_update_time);
-                checkImgExists(passcode_url).then(() => {
-                    document.getElementById('passcode_img_preload').src = passcode_url;
-                    document.getElementById('passcodeImg').style.backgroundImage = `url(${passcode_url})`;
+                checkImgExists(passcodeUrl).then(() => {
+                    document.getElementById('passcode_img_preload').src = passcodeUrl;
+                    passcodeImg.style.backgroundImage = `url(${passcodeUrl})`;
                 }).catch(() => {
                     //fail callback
                     document.getElementById('passcode_img_preload').src = localPasscodeImgPath;
-                    document.getElementById('passcodeImg').style.backgroundImage = `url(${localPasscodeImgPath})`;
+                    passcodeImg.style.backgroundImage = `url(${localPasscodeImgPath})`;
                 })
             });
+
     </script>
 </body>
 
