@@ -1,6 +1,9 @@
 # gatepasscode
 郑州大学主校区入校通行码，适配北门、东门、南门。
 
+## Update
+作者毕业了，该项目停止维护。访客页面未经验证，谨慎使用。
+
 ### 本人其他相关项目
 * [郑州大学空教室查询](https://github.com/TorCroft/ZZU-ClassRoom)，查询特定教学楼空教室。
 * [郑州大学移动校园API](https://github.com/TorCroft/ZZU-API)，提供空教室查询、成绩查询、课表查询等服务。
